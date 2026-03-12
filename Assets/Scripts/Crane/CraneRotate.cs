@@ -21,7 +21,7 @@ public class CraneRotate : MonoBehaviour
 
         currentAngle += rotationSpeed * Time.deltaTime;
 
-        if (currentAngle >= endAngle)
+        if (currentAngle > endAngle)
         {
             rotationSpeed *= -1f;
         }
@@ -29,6 +29,12 @@ public class CraneRotate : MonoBehaviour
         {
             rotationSpeed *= -1f;
         }
+        else if(currentAngle == endAngle)
+        {
+            Debug.Log("Crane should stop here");
+            isRotating = false;
+        }
+        
 
         transform.localRotation = Quaternion.Euler(0f, currentAngle, 0f);
     }
