@@ -27,6 +27,7 @@ public class Hook : MonoBehaviour
     public bool isReleasing;
 
     [SerializeField] private CraneRotate crane;
+    [SerializeField] private TruckSlotManager truckSlotManager;
 
     private void Start()
     {
@@ -132,6 +133,14 @@ public class Hook : MonoBehaviour
 
 
         totalCargoReleased += cargoStack.Count;
+
+        Transform slot = truckSlotManager.GetNextSlot();
+        if(slot != null)
+        {
+            StartCoroutine(truckSlotManager.MoveCargoToSlot(cargoStack[0].gameObject.transform, slot));
+        }
+            
+
 
         //if(cargoStack.Count > highestCargoStack)
         //{

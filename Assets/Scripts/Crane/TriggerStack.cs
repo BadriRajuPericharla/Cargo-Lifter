@@ -27,6 +27,10 @@ public class TriggerStack : MonoBehaviour
         if (hook.cargoStack.Count < MaxCargo)
         {
             hook.StackCargo(other.gameObject);
+            if(craneRotate.rotationSpeed < 0)
+            {
+                craneRotate.rotationSpeed *= -1;
+            }
         }
     }
 
