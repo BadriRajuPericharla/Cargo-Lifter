@@ -31,7 +31,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: IsRun-2
+    m_ConditionEvent: IsRun2
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -667662845984241950}
@@ -109,7 +109,7 @@ AnimatorController:
   m_Name: TruckAnimator-3
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: IsRun-2
+  - m_Name: IsRun2
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
