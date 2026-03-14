@@ -6,6 +6,8 @@ using UnityEngine;
 public class Hook : MonoBehaviour
 {
     [SerializeField] private GameObject cargoContainer;
+    [SerializeField] private TrucksManagment trucksManagment;
+
     BoxCollider cargoContainerCollider;
     public List<GameObject> cargoStack = new List<GameObject>();
 
@@ -57,21 +59,25 @@ public class Hook : MonoBehaviour
         {
             craneAudio.MoveDown();
         }
-        else
+        else if(crane.isRotating)
         {
             craneAudio.Move();
+        }
+        else
+        {
+            craneAudio.Stop();
         }
 
     }
 
     void RopeControl()
     {
+        //Debug.Log($"IsReleasing: {isReleasing}");
         if (isReleasing)
         {
             crane.StopRotation();
             return;
         }
-
         if(input <= 0.01f && input >= -0.01f && !crane.isCollided && isGameStarted && !crane.isAtDropPoint)
         {
             crane.StartRotation();
@@ -86,6 +92,8 @@ public class Hook : MonoBehaviour
                 postureBreaks++; //calculating posture breaks based on hold time
             }
         }
+
+        
 
             transform.Translate(0, input * ropeSpeed * Time.deltaTime, 0);
 
@@ -152,8 +160,9 @@ public class Hook : MonoBehaviour
 
         totalCargoReleased += cargoStack.Count;
 
-
-            
+        int truckIndex = (totalCargoReleased - 1) / 5;
+        truckIndex = Mathf.Clamp(truckIndex, 0, trucksManagment.trucks.Length - 1);
+        trucksManagment.AssignSlotToCargo(trucksManagment.trucks[truckIndex], truckIndex); 
 
 
         //if(cargoStack.Count > highestCargoStack)

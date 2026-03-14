@@ -52,5 +52,10 @@ public class CraneRotate : MonoBehaviour
     {
         isRotating = false;
     }
+
+    public void RotateReverse()
+    {
+        rotationSpeed *= -1;
+    }
 }
 

@@ -17,20 +17,23 @@ public class TruckSlotManager : MonoBehaviour
 
         Transform slot = truckSlots[currentSlotIndex];
         currentSlotIndex++;
-
+        //Debug.Log($"Slot Recevied: {slot}");
         return slot;
     }
 
 
     public IEnumerator MoveCargoToSlot(Transform cargo, Transform truckSlot)
     {
+        //Debug.Log($"Move Cargo: {cargo} to slot:{truckSlot}");
+        Rigidbody cargoRb = cargo.GetComponent<Rigidbody>();
+
         Vector3 startPos = cargo.position;
         Vector3 endPos = truckSlot.position;
 
         float time = 0f;
-        float duration = 3f;
+        float duration = 0.5f;
 
-        if(time < duration)
+        while(time < duration)
         {
             cargo.position = Vector3.Lerp(startPos, endPos, time/duration);
             time += Time.deltaTime;
@@ -38,8 +41,10 @@ public class TruckSlotManager : MonoBehaviour
         }
 
         cargo.position = endPos;
-        cargo.rotation = truckSlot.rotation;
-
+        cargo.localRotation = truckSlot.localRotation;
         cargo.transform.SetParent(truckSlot);
+
+        yield return new WaitForSeconds(3);
+        cargoRb.constraints = RigidbodyConstraints.FreezeAll;
     }
 }

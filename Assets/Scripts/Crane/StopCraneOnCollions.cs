@@ -10,6 +10,8 @@ public class StopCraneOnCollions : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log($"Hook Collided With: {collision.gameObject.name}. isCollided: {crane.isCollided}");
+
         if (collision.gameObject.tag == "Ground")
             return;
 

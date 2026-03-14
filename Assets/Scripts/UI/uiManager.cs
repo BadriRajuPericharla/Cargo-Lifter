@@ -40,15 +40,15 @@ public class uiManager : MonoBehaviour
 
     private void Update()
     {
-        //if (gameManager.sessionEnded && !leaderboardShown)
-        //{
-        //    Invoke("ShowLeaderBoard", 2F);
-        //    leaderboardShown = true;
-        //}
-        //if (leaderboardShown)
-        //{
-        //    crane.StopRotation();
-        //}
+        if (gameManager.sessionEnded && !leaderboardShown)
+        {
+            Invoke("ShowLeaderBoard", 6f);
+            leaderboardShown = true;
+        }
+        if (leaderboardShown)
+        {
+            crane.StopRotation();
+        }
     }
 
 
@@ -76,7 +76,7 @@ public class uiManager : MonoBehaviour
         hook.isGameStarted = true;
         crane.rotationSpeed = 15f;
         hook.ropeSpeed = 18f;
-        gameManager.SpawnTrucks(1);
+        gameManager.Level = GameManager.diffLevel.Begginer;
     }
 
     public void LoadIntermediateLevel()
@@ -88,7 +88,8 @@ public class uiManager : MonoBehaviour
         hook.isGameStarted = true;
         hook.ropeSpeed = 12f;
         crane.rotationSpeed = 25f;
-        gameManager.SpawnTrucks(2);
+        gameManager.Level = GameManager.diffLevel.Intermidiate;
+
     }
 
     public void LoadExpertLevel()
@@ -101,7 +102,8 @@ public class uiManager : MonoBehaviour
         hook.isGameStarted = true;
         hook.ropeSpeed = 8f;
         crane.rotationSpeed = 40f;
-        gameManager.SpawnTrucks(3);
+        gameManager.Level = GameManager.diffLevel.Expert;
+
     }
 
     public void GoToStart()

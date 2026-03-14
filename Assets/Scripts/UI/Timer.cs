@@ -30,9 +30,14 @@ public class Timer
 
     }
 
+    public void Stop()
+    {
+        isTimerRunning = false;
+    }
 
     private void OnTimerFinished()
     {
         ui.ShowGameOver();
+
     }
 }
