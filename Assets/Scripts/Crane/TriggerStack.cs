@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TriggerStack : MonoBehaviour
@@ -10,6 +11,7 @@ public class TriggerStack : MonoBehaviour
     public int MaxCargo = 1;
     private void OnTriggerEnter(Collider other)
     {
+
         if (!(other.gameObject.tag == "Cargo"))
         {
             if (other.gameObject.tag == "DropZone" && hook.cargoStack.Count > 0 && craneRotate.isAtDropPoint)
@@ -30,6 +32,11 @@ public class TriggerStack : MonoBehaviour
             {
                 craneRotate.rotationSpeed *= -1;
             }
+        }
+
+        if(hook.transform.position.y < 0)
+        {
+            hook.transform.position = new Vector3(hook.transform.position.x, 0, hook.transform.position.z);
         }
     }
 

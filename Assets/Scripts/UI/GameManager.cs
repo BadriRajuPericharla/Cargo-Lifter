@@ -24,12 +24,14 @@ public class GameManager : MonoBehaviour
 
     [Header("Trucks")]
     [SerializeField] private GameObject[] trucks;
+    [SerializeField] private GameObject[] cargoLists;
     public enum diffLevel {Begginer, Intermidiate, Expert};
     public diffLevel Level;
 
     private void Start()
     {
         ClearTrucks();
+        ClearAllCargo();
     }
 
 
@@ -37,6 +39,26 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         if (!hook.isGameStarted) return;
+
+        switch (Level)
+        {
+            case diffLevel.Begginer:
+                SpawnTrucks(1);
+                SpawnCargoList(1);
+                totalCargo = 5;
+                break;
+            case diffLevel.Intermidiate:
+                SpawnTrucks(2);
+                SpawnCargoList(2);
+                totalCargo = 10;
+                break;
+            case diffLevel.Expert:
+                SpawnTrucks(3);
+                SpawnCargoList(3);
+                totalCargo = 15;
+                break;
+        }
+
 
         if (sessionEnded)
         {
@@ -52,6 +74,7 @@ public class GameManager : MonoBehaviour
             //StartCoroutine(PlayTruckAnimAfter());
             UpdateSessionResults();
             sessionEnded = true;
+            timer.Stop();
             showAnalytics.UpdateAnalyticsDisplay(data);
         }
 
@@ -126,4 +149,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SpawnCargoList(int noOfCargo)
+    {
+        for (int i = 0; i < noOfCargo;)
+        {
+            if (!cargoLists[i].activeSelf)
+            {
+                cargoLists[i].SetActive(true);
+            }
+            i++;
+        }
+    }
+
+    public void ClearAllCargo()
+    {
+        foreach (GameObject cargoList in cargoLists)
+        {
+            cargoList.SetActive(false);
+        }
+    }
 }

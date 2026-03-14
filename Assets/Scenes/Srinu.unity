@@ -30478,7 +30478,6 @@ MonoBehaviour:
   - {fileID: 1021570029}
   - {fileID: 1948062658}
   - {fileID: 1231893898}
-  hook: {fileID: 1460424602}
   currentSlotIndex: 0
 --- !u!1001 &1184500704
 PrefabInstance:
@@ -44339,9 +44338,9 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 1.8
-  far clip plane: 1000
-  field of view: 41.2
+  near clip plane: 8.53
+  far clip plane: 1019.99
+  field of view: 33.02
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -44367,8 +44366,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1678576552}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.554505, y: 0.001277705, z: 0.0031866604, w: 0.83217335}
-  m_LocalPosition: {x: -4.003997, y: 27.36, z: -50.906998}
+  m_LocalRotation: {x: 0.27389064, y: 0.00395301, z: -0.001125753, w: 0.9617521}
+  m_LocalPosition: {x: -4.199999, y: 29.9, z: -74.94}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -51879,7 +51878,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2001442776
 RectTransform:
   m_ObjectHideFlags: 0

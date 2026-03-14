@@ -59,9 +59,13 @@ public class Hook : MonoBehaviour
         {
             craneAudio.MoveDown();
         }
-        else
+        else if(crane.isRotating)
         {
             craneAudio.Move();
+        }
+        else
+        {
+            craneAudio.Stop();
         }
 
     }
@@ -88,6 +92,8 @@ public class Hook : MonoBehaviour
                 postureBreaks++; //calculating posture breaks based on hold time
             }
         }
+
+        
 
             transform.Translate(0, input * ropeSpeed * Time.deltaTime, 0);
 
@@ -154,7 +160,8 @@ public class Hook : MonoBehaviour
 
         totalCargoReleased += cargoStack.Count;
 
-        int truckIndex = totalCargoReleased > 5 ? (totalCargoReleased / 5) : 0;
+        int truckIndex = (totalCargoReleased - 1) / 5;
+        truckIndex = Mathf.Clamp(truckIndex, 0, trucksManagment.trucks.Length - 1);
         trucksManagment.AssignSlotToCargo(trucksManagment.trucks[truckIndex], truckIndex); 
 
 

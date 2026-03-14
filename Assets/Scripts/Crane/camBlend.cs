@@ -39,7 +39,6 @@ public class camBlend : MonoBehaviour
             hookCam.SetActive(false);
         }
 
-        Debug.Log(rotatingRod.localEulerAngles.y <= camChangePoint && crane.isRotating);
 
 
         // float yAngle = rotatingRod.localEulerAngles.y;
