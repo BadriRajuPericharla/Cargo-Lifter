@@ -77,6 +77,7 @@ public class uiManager : MonoBehaviour
         crane.rotationSpeed = 15f;
         hook.ropeSpeed = 18f;
         gameManager.SpawnTrucks(1);
+        gameManager.Level = GameManager.diffLevel.Begginer;
     }
 
     public void LoadIntermediateLevel()
@@ -89,6 +90,8 @@ public class uiManager : MonoBehaviour
         hook.ropeSpeed = 12f;
         crane.rotationSpeed = 25f;
         gameManager.SpawnTrucks(2);
+        gameManager.Level = GameManager.diffLevel.Intermidiate;
+
     }
 
     public void LoadExpertLevel()
@@ -102,6 +105,8 @@ public class uiManager : MonoBehaviour
         hook.ropeSpeed = 8f;
         crane.rotationSpeed = 40f;
         gameManager.SpawnTrucks(3);
+        gameManager.Level = GameManager.diffLevel.Expert;
+
     }
 
     public void GoToStart()

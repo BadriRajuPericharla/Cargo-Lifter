@@ -1,38 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
+//using System.Diagnostics;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class TrucksManagment : MonoBehaviour
 {
-    [SerializeField] private GameObject[] trucks;
+    [SerializeField] public GameObject[] trucks;
 
     [SerializeField] private GameObject lastTruckFollowCam;
 
     [SerializeField] private Hook hook;
-    bool wasReleasingLastFrame = false;
+    [SerializeField] private GameManager gameManager;
+
 
     private void Update()
     {
-        bool isReleaseStarted = hook.isReleasing && !wasReleasingLastFrame;
-        for (int i = 0; i < trucks.Length; i++)
-        {
-            if(isReleaseStarted)
-                AssignSlotToCargo(trucks[i], i);
-        }
-        wasReleasingLastFrame = hook.isReleasing;
+        //bool isReleaseStarted = hook.isReleasing && !wasReleasingLastFrame;
+        //for (int i = 0; i < trucks.Length; i++)
+        //{
+        //    //if(isReleaseStarted)
+        //        AssignSlotToCargo(trucks[i], i);
+        //}
+        ////wasReleasingLastFrame = hook.isReleasing;
     }
 
     public bool CheckTruckFilled(GameObject truck)
     {
         Transform slotContainer = truck.transform.GetChild(11);
+        //Debug.Log($"SlotContainer: {slotContainer.name}");
         TruckSlotManager truckSlotManager = truck.GetComponent<TruckSlotManager>();
 
         if(slotContainer != null && truckSlotManager != null)
         {
-            if(slotContainer.childCount == truckSlotManager.truckSlots.Count)
+            if(slotContainer.childCount == truckSlotManager.currentSlotIndex)
             {
+                //Debug.Log($"truckSlotManager.truckSlots.Count: {truckSlotManager.currentSlotIndex + 1}  slotContainer.childCount: {slotContainer.childCount} ");
+
                 return true;
             }
         }
@@ -62,14 +66,27 @@ public class TrucksManagment : MonoBehaviour
         }
         if (CheckTruckFilled(truck))
         {
-            PlayTruckAnimation(truck, i);
+            StartCoroutine(PlayTruckAnimAfter(truck, i));
 
-            if(truck == trucks[trucks.Length - 1])
+            int lastTruckIndex;
+            switch (gameManager.Level)
+            {
+                case GameManager.diffLevel.Begginer: lastTruckIndex = 0; break;
+                case GameManager.diffLevel.Intermidiate: lastTruckIndex = 1; break;
+                case GameManager.diffLevel.Expert: lastTruckIndex = 2; break;
+                default: lastTruckIndex = 0; break;
+            }
+
+            if(truck == trucks[lastTruckIndex])
             {
                 lastTruckFollowCam.SetActive(true);
             }
         }
     }
 
-
+    public IEnumerator PlayTruckAnimAfter(GameObject truck, int i)
+    {
+        yield return new WaitForSeconds(4);
+        PlayTruckAnimation(truck, i);
+    }
 }         

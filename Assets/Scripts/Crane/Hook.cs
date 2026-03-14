@@ -6,6 +6,8 @@ using UnityEngine;
 public class Hook : MonoBehaviour
 {
     [SerializeField] private GameObject cargoContainer;
+    [SerializeField] private TrucksManagment trucksManagment;
+
     BoxCollider cargoContainerCollider;
     public List<GameObject> cargoStack = new List<GameObject>();
 
@@ -66,12 +68,12 @@ public class Hook : MonoBehaviour
 
     void RopeControl()
     {
+        //Debug.Log($"IsReleasing: {isReleasing}");
         if (isReleasing)
         {
             crane.StopRotation();
             return;
         }
-
         if(input <= 0.01f && input >= -0.01f && !crane.isCollided && isGameStarted && !crane.isAtDropPoint)
         {
             crane.StartRotation();
@@ -152,8 +154,8 @@ public class Hook : MonoBehaviour
 
         totalCargoReleased += cargoStack.Count;
 
-
-            
+        int truckIndex = totalCargoReleased > 5 ? (totalCargoReleased / 5) : 0;
+        trucksManagment.AssignSlotToCargo(trucksManagment.trucks[truckIndex], truckIndex); 
 
 
         //if(cargoStack.Count > highestCargoStack)

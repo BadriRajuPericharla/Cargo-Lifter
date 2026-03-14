@@ -24,7 +24,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Trucks")]
     [SerializeField] private GameObject[] trucks;
-
+    public enum diffLevel {Begginer, Intermidiate, Expert};
+    public diffLevel Level;
 
     private void Start()
     {
